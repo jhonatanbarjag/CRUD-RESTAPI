@@ -1,20 +1,33 @@
 import { Router } from "express";
 import { conexion } from "../database/db.js";
+import { save } from "../controllers/crud.js";
 
 const router = Router();
 
 
 router.get('/', (req, res) => {
-    res.render('index');
-})
-    //conexion.query('select * from users', (error , results) => {
-      //  if (error) {
-        //    throw error;
+    
+
+    conexion.query('select * from users', (error , results) => {
+        if (error) {
+            throw error;
             
-        //} else {
-          //  res.json(results);
-        //}
-//})
-//});
+        } else {
+            res.render('index', {results:results});
+        }
+})
+});
+
+
+
+//routa para agregar usuarios
+router.get('/create', (req, res) => {
+    
+    res.render('create');
+});
+router.post('/save', save);
+
+
+
 
 export default router;

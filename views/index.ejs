@@ -40,6 +40,34 @@
 
     <div class="container">
         <a href="create" class="btn btn-outline-primary mt-4"> <i class='bx bx-plus-medical'></i></a>
+        <table class="table table-hover table-bordered table-striped text-center align-middle mt-4">
+            <thead class="table-dark">
+                <tr class="bg-primary text-white">
+                    <th>ID</th>
+                    <th>USUARIO</th>
+                    <th>ROL</th>
+                    <th>ACCIONES</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <% results.forEach((user) =>{ %>
+                    <tr>
+                        <td><%= user.id %></td>
+                        <td><%= user.user %></td>
+                        <td><%= user.rol %></td>
+                        <td>
+                            <a href="/edit" class="btn btn-outline-info">editar</a>
+                            <a href="/delete" class="btn btn-outline-danger">eliminar</a>
+    
+                        </td>
+                    </tr>
+
+                <% }) %>
+               
+            </tbody>
+        </table>
         
 
     </div>
