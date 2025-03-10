@@ -1,7 +1,25 @@
 import { conexion } from "../database/db.js";
 
 export async function save (req, res) {
-    const user = req.body.user;
+    try {
+        const user = req.body.user;
+        const rol = req.body.rol;
+
+        // logica para guardar en la base de datos
+        conexion.query('insert into users set ?',{user:user, rol:rol}, (error, results) => {
+            if (error) {
+                console.log(error);
+                
+            } else {
+                console.log("Usuario guardado exitosamente", results);
+                res.redirect('/');
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+   /* const user = req.body.user;
     const rol = req.body.rol;
 
 // logica para guardar en la base de datos
@@ -13,10 +31,10 @@ conexion.query('insert into users set ?',{user:user, rol:rol}, (error, results) 
             res.redirect('/');
         }
     });
-};
+};*/
 
 //funcion para editar usuarios
-export async function update (req, res) {
+export  function update (req, res) {
     const id = req.params.id;
     const user = req.body.user;
     const rol = req.body.rol;
